@@ -1,0 +1,643 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<project name="SqlServer" id="Project_9d3" database="SqlServer" >
+	<schema name="dbo" catalogname="OSC_MS" >
+		<table name="cart_items" row_count="0" >
+			<column name="cart_item_id" type="int" length="10" decimal="0" jt="4" mandatory="y" autoincrement="y" />
+			<column name="user_id" type="int" length="10" decimal="0" jt="4" />
+			<column name="product_id" type="int" length="10" decimal="0" jt="4" />
+			<column name="quantity" type="int" length="10" decimal="0" jt="4" />
+			<column name="created_at" type="datetime" length="23" decimal="3" jt="92" >
+				<defo>getdate()</defo>
+			</column>
+			<index name="PK__cart_ite__5D9A6C6EE4A3FC9C" unique="PRIMARY_KEY" >
+				<column name="cart_item_id" />
+			</index>
+			<fk name="FK__cart_item__produ__267ABA7A" to_schema="OSC_MS.dbo" to_table="products" >
+				<fk_column name="product_id" pk="product_id" />
+			</fk>
+			<fk name="FK__cart_item__user___25869641" to_schema="OSC_MS.dbo" to_table="users" >
+				<fk_column name="user_id" pk="user_id" />
+			</fk>
+		</table>
+		<table name="categories" row_count="0" >
+			<column name="category_id" type="int" length="10" decimal="0" jt="4" mandatory="y" autoincrement="y" />
+			<column name="category_name" type="varchar" length="255" decimal="0" jt="12" />
+			<index name="PK__categori__D54EE9B41E6246AA" unique="PRIMARY_KEY" >
+				<column name="category_id" />
+			</index>
+		</table>
+		<table name="checkouts" row_count="0" >
+			<column name="checkout_id" type="int" length="10" decimal="0" jt="4" mandatory="y" autoincrement="y" />
+			<column name="order_id" type="int" length="10" decimal="0" jt="4" />
+			<column name="user_id" type="int" length="10" decimal="0" jt="4" />
+			<column name="payment_method_id" type="int" length="10" decimal="0" jt="4" />
+			<column name="delivery_address" type="varchar" length="255" decimal="0" jt="12" />
+			<column name="created_at" type="datetime" length="23" decimal="3" jt="92" >
+				<defo>getdate()</defo>
+			</column>
+			<index name="PK__checkout__0EEF3CE0318322B8" unique="PRIMARY_KEY" >
+				<column name="checkout_id" />
+			</index>
+			<fk name="FK__checkouts__order__3E1D39E1" to_schema="OSC_MS.dbo" to_table="orders" >
+				<fk_column name="order_id" pk="order_id" />
+			</fk>
+			<fk name="FK__checkouts__payme__40058253" to_schema="OSC_MS.dbo" to_table="payment_methods" >
+				<fk_column name="payment_method_id" pk="payment_method_id" />
+			</fk>
+			<fk name="FK__checkouts__user___3F115E1A" to_schema="OSC_MS.dbo" to_table="users" >
+				<fk_column name="user_id" pk="user_id" />
+			</fk>
+		</table>
+		<table name="claims" row_count="0" >
+			<column name="claim_id" type="int" length="10" decimal="0" jt="4" mandatory="y" autoincrement="y" />
+			<column name="claim_name" type="varchar" length="255" decimal="0" jt="12" />
+			<index name="PK__claims__F9CC0896E843F0F8" unique="PRIMARY_KEY" >
+				<column name="claim_id" />
+			</index>
+		</table>
+		<table name="coupon_usage" row_count="0" >
+			<column name="coupon_usage_id" type="int" length="10" decimal="0" jt="4" mandatory="y" autoincrement="y" />
+			<column name="user_id" type="int" length="10" decimal="0" jt="4" />
+			<column name="coupon_id" type="int" length="10" decimal="0" jt="4" />
+			<column name="product_id" type="int" length="10" decimal="0" jt="4" />
+			<index name="PK__coupon_u__1B44EFEBDD46AB30" unique="PRIMARY_KEY" >
+				<column name="coupon_usage_id" />
+			</index>
+			<fk name="FK__coupon_us__coupo__245D67DE" to_schema="OSC_MS.dbo" to_table="coupons" >
+				<fk_column name="coupon_id" pk="coupon_id" />
+			</fk>
+			<fk name="FK__coupon_us__produ__25518C17" to_schema="OSC_MS.dbo" to_table="products" >
+				<fk_column name="product_id" pk="product_id" />
+			</fk>
+			<fk name="FK__coupon_us__user___236943A5" to_schema="OSC_MS.dbo" to_table="users" >
+				<fk_column name="user_id" pk="user_id" />
+			</fk>
+		</table>
+		<table name="coupons" row_count="0" >
+			<column name="coupon_id" type="int" length="10" decimal="0" jt="4" mandatory="y" autoincrement="y" />
+			<column name="coupon_code" type="varchar" length="255" decimal="0" jt="12" />
+			<column name="discount" type="decimal" length="10" decimal="2" jt="3" />
+			<column name="start_date" type="date" length="10" decimal="0" jt="91" />
+			<column name="end_date" type="date" length="10" decimal="0" jt="91" />
+			<index name="PK__coupons__58CF63899BFD94AE" unique="PRIMARY_KEY" >
+				<column name="coupon_id" />
+			</index>
+		</table>
+		<table name="featured_products" row_count="0" >
+			<column name="featured_id" type="int" length="10" decimal="0" jt="4" mandatory="y" autoincrement="y" />
+			<column name="product_id" type="int" length="10" decimal="0" jt="4" />
+			<column name="created_at" type="datetime" length="23" decimal="3" jt="92" >
+				<defo>getdate()</defo>
+			</column>
+			<index name="PK__featured__8D1458B24C15628D" unique="PRIMARY_KEY" >
+				<column name="featured_id" />
+			</index>
+			<fk name="FK__featured___produ__1BC821DD" to_schema="OSC_MS.dbo" to_table="products" >
+				<fk_column name="product_id" pk="product_id" />
+			</fk>
+		</table>
+		<table name="feedback_ratings" row_count="0" >
+			<column name="rating_id" type="int" length="10" decimal="0" jt="4" mandatory="y" autoincrement="y" />
+			<column name="feedback_id" type="int" length="10" decimal="0" jt="4" />
+			<column name="user_id" type="int" length="10" decimal="0" jt="4" />
+			<column name="rating" type="int" length="10" decimal="0" jt="4" />
+			<column name="created_at" type="datetime" length="23" decimal="3" jt="92" >
+				<defo>getdate()</defo>
+			</column>
+			<index name="PK__feedback__D35B278B89427413" unique="PRIMARY_KEY" >
+				<column name="rating_id" />
+			</index>
+			<fk name="FK__feedback___feedb__0C85DE4D" to_schema="OSC_MS.dbo" to_table="feedbacks" >
+				<fk_column name="feedback_id" pk="feedback_id" />
+			</fk>
+			<fk name="FK__feedback___user___0D7A0286" to_schema="OSC_MS.dbo" to_table="users" >
+				<fk_column name="user_id" pk="user_id" />
+			</fk>
+		</table>
+		<table name="feedbacks" row_count="0" >
+			<column name="feedback_id" type="int" length="10" decimal="0" jt="4" mandatory="y" autoincrement="y" />
+			<column name="feedback_text" type="varchar" length="255" decimal="0" jt="12" />
+			<column name="created_at" type="datetime" length="23" decimal="3" jt="92" >
+				<defo>getdate()</defo>
+			</column>
+			<index name="PK__feedback__7A6B2B8C1C894130" unique="PRIMARY_KEY" >
+				<column name="feedback_id" />
+			</index>
+		</table>
+		<table name="image_uploads" row_count="0" >
+			<column name="image_id" type="int" length="10" decimal="0" jt="4" mandatory="y" autoincrement="y" />
+			<column name="product_id" type="int" length="10" decimal="0" jt="4" />
+			<column name="image_url" type="varchar" length="255" decimal="0" jt="12" />
+			<column name="created_at" type="datetime" length="23" decimal="3" jt="92" >
+				<defo>getdate()</defo>
+			</column>
+			<index name="PK__image_up__DC9AC955F6402F20" unique="PRIMARY_KEY" >
+				<column name="image_id" />
+			</index>
+			<fk name="FK__image_upl__produ__7D439ABD" to_schema="OSC_MS.dbo" to_table="products" >
+				<fk_column name="product_id" pk="product_id" />
+			</fk>
+		</table>
+		<table name="inventory" row_count="0" >
+			<column name="inventory_id" type="int" length="10" decimal="0" jt="4" mandatory="y" autoincrement="y" />
+			<column name="product_id" type="int" length="10" decimal="0" jt="4" />
+			<column name="warehouse_id" type="int" length="10" decimal="0" jt="4" />
+			<column name="quantity" type="int" length="10" decimal="0" jt="4" />
+			<column name="created_at" type="datetime" length="23" decimal="3" jt="92" >
+				<defo>getdate()</defo>
+			</column>
+			<index name="PK__inventor__B59ACC49D64DFAE1" unique="PRIMARY_KEY" >
+				<column name="inventory_id" />
+			</index>
+			<fk name="FK__inventory__produ__787EE5A0" to_schema="OSC_MS.dbo" to_table="products" >
+				<fk_column name="product_id" pk="product_id" />
+			</fk>
+			<fk name="FK__inventory__wareh__797309D9" to_schema="OSC_MS.dbo" to_table="warehouses" >
+				<fk_column name="warehouse_id" pk="warehouse_id" />
+			</fk>
+		</table>
+		<table name="order_items" row_count="0" >
+			<column name="order_item_id" type="int" length="10" decimal="0" jt="4" mandatory="y" autoincrement="y" />
+			<column name="order_id" type="int" length="10" decimal="0" jt="4" />
+			<column name="product_id" type="int" length="10" decimal="0" jt="4" />
+			<column name="quantity" type="int" length="10" decimal="0" jt="4" />
+			<column name="price" type="decimal" length="10" decimal="2" jt="3" />
+			<column name="created_at" type="datetime" length="23" decimal="3" jt="92" >
+				<defo>getdate()</defo>
+			</column>
+			<index name="PK__order_it__3764B6BC7352A392" unique="PRIMARY_KEY" >
+				<column name="order_item_id" />
+			</index>
+			<fk name="FK__order_ite__order__2E1BDC42" to_schema="OSC_MS.dbo" to_table="orders" >
+				<fk_column name="order_id" pk="order_id" />
+			</fk>
+			<fk name="FK__order_ite__produ__2F10007B" to_schema="OSC_MS.dbo" to_table="products" >
+				<fk_column name="product_id" pk="product_id" />
+			</fk>
+		</table>
+		<table name="orders" row_count="0" >
+			<column name="order_id" type="int" length="10" decimal="0" jt="4" mandatory="y" autoincrement="y" />
+			<column name="order_number" type="char" length="16" decimal="0" jt="1" />
+			<column name="user_id" type="int" length="10" decimal="0" jt="4" />
+			<column name="delivery_type" type="int" length="10" decimal="0" jt="4" />
+			<column name="payment_status" type="int" length="10" decimal="0" jt="4" />
+			<column name="status" type="int" length="10" decimal="0" jt="4" />
+			<column name="created_at" type="datetime" length="23" decimal="3" jt="92" >
+				<defo>getdate()</defo>
+			</column>
+			<index name="PK__orders__4659622991BC4EF7" unique="PRIMARY_KEY" >
+				<column name="order_id" />
+			</index>
+			<fk name="FK__orders__user_id__2A4B4B5E" to_schema="OSC_MS.dbo" to_table="users" >
+				<fk_column name="user_id" pk="user_id" />
+			</fk>
+		</table>
+		<table name="payment_methods" row_count="0" >
+			<column name="payment_method_id" type="int" length="10" decimal="0" jt="4" mandatory="y" autoincrement="y" />
+			<column name="payment_method_name" type="varchar" length="255" decimal="0" jt="12" />
+			<index name="PK__payment___8A3EA9EB3BF1B1C3" unique="PRIMARY_KEY" >
+				<column name="payment_method_id" />
+			</index>
+		</table>
+		<table name="payments" row_count="0" >
+			<column name="payment_id" type="int" length="10" decimal="0" jt="4" mandatory="y" autoincrement="y" />
+			<column name="order_id" type="int" length="10" decimal="0" jt="4" />
+			<column name="payment_method_id" type="int" length="10" decimal="0" jt="4" />
+			<column name="amount" type="decimal" length="10" decimal="2" jt="3" />
+			<column name="payment_date" type="datetime" length="23" decimal="3" jt="92" >
+				<defo>getdate()</defo>
+			</column>
+			<index name="PK__payments__ED1FC9EA3160BBAE" unique="PRIMARY_KEY" >
+				<column name="payment_id" />
+			</index>
+			<fk name="FK__payments__order___34C8D9D1" to_schema="OSC_MS.dbo" to_table="orders" >
+				<fk_column name="order_id" pk="order_id" />
+			</fk>
+			<fk name="FK__payments__paymen__35BCFE0A" to_schema="OSC_MS.dbo" to_table="payment_methods" >
+				<fk_column name="payment_method_id" pk="payment_method_id" />
+			</fk>
+		</table>
+		<table name="products" row_count="0" >
+			<column name="product_id" type="int" length="10" decimal="0" jt="4" mandatory="y" autoincrement="y" />
+			<column name="category_id" type="int" length="10" decimal="0" jt="4" />
+			<column name="product_code" type="char" length="2" decimal="0" jt="1" />
+			<column name="product_number" type="char" length="5" decimal="0" jt="1" />
+			<column name="price" type="decimal" length="10" decimal="2" jt="3" />
+			<column name="description" type="varchar" length="255" decimal="0" jt="12" />
+			<column name="image_url" type="varchar" length="255" decimal="0" jt="12" />
+			<column name="created_at" type="datetime" length="23" decimal="3" jt="92" >
+				<defo>getdate()</defo>
+			</column>
+			<index name="PK__products__47027DF5135234C1" unique="PRIMARY_KEY" >
+				<column name="product_id" />
+			</index>
+			<fk name="FK__products__catego__1367E606" to_schema="OSC_MS.dbo" to_table="categories" >
+				<fk_column name="category_id" pk="category_id" />
+			</fk>
+		</table>
+		<table name="purchase_order_items" row_count="0" >
+			<column name="purchase_order_item_id" type="int" length="10" decimal="0" jt="4" mandatory="y" autoincrement="y" />
+			<column name="purchase_order_id" type="int" length="10" decimal="0" jt="4" />
+			<column name="product_id" type="int" length="10" decimal="0" jt="4" />
+			<column name="quantity" type="int" length="10" decimal="0" jt="4" />
+			<column name="price" type="decimal" length="10" decimal="2" jt="3" />
+			<column name="created_at" type="datetime" length="23" decimal="3" jt="92" >
+				<defo>getdate()</defo>
+			</column>
+			<index name="PK__purchase__8A902DFA7F2995BD" unique="PRIMARY_KEY" >
+				<column name="purchase_order_item_id" />
+			</index>
+			<fk name="FK__purchase___produ__6D0D32F4" to_schema="OSC_MS.dbo" to_table="products" >
+				<fk_column name="product_id" pk="product_id" />
+			</fk>
+			<fk name="FK__purchase___purch__6C190EBB" to_schema="OSC_MS.dbo" to_table="purchase_orders" >
+				<fk_column name="purchase_order_id" pk="purchase_order_id" />
+			</fk>
+		</table>
+		<table name="purchase_orders" row_count="0" >
+			<column name="purchase_order_id" type="int" length="10" decimal="0" jt="4" mandatory="y" autoincrement="y" />
+			<column name="order_number" type="char" length="16" decimal="0" jt="1" />
+			<column name="supplier_id" type="int" length="10" decimal="0" jt="4" />
+			<column name="created_at" type="datetime" length="23" decimal="3" jt="92" >
+				<defo>getdate()</defo>
+			</column>
+			<index name="PK__purchase__AFCA88E690247E99" unique="PRIMARY_KEY" >
+				<column name="purchase_order_id" />
+			</index>
+			<fk name="FK__purchase___suppl__68487DD7" to_schema="OSC_MS.dbo" to_table="suppliers" >
+				<fk_column name="supplier_id" pk="supplier_id" />
+			</fk>
+		</table>
+		<table name="replacements" row_count="0" >
+			<column name="replacement_id" type="int" length="10" decimal="0" jt="4" mandatory="y" autoincrement="y" />
+			<column name="order_id" type="int" length="10" decimal="0" jt="4" />
+			<column name="product_id" type="int" length="10" decimal="0" jt="4" />
+			<column name="replacement_reason" type="varchar" length="255" decimal="0" jt="12" />
+			<column name="replacement_date" type="datetime" length="23" decimal="3" jt="92" >
+				<defo>getdate()</defo>
+			</column>
+			<index name="PK__replacem__7F5A6921F460E21F" unique="PRIMARY_KEY" >
+				<column name="replacement_id" />
+			</index>
+			<fk name="FK__replaceme__order__3B75D760" to_schema="OSC_MS.dbo" to_table="orders" >
+				<fk_column name="order_id" pk="order_id" />
+			</fk>
+			<fk name="FK__replaceme__produ__3C69FB99" to_schema="OSC_MS.dbo" to_table="products" >
+				<fk_column name="product_id" pk="product_id" />
+			</fk>
+		</table>
+		<table name="returns" row_count="0" >
+			<column name="return_id" type="int" length="10" decimal="0" jt="4" mandatory="y" autoincrement="y" />
+			<column name="order_id" type="int" length="10" decimal="0" jt="4" />
+			<column name="product_id" type="int" length="10" decimal="0" jt="4" />
+			<column name="return_reason" type="varchar" length="255" decimal="0" jt="12" />
+			<column name="return_date" type="datetime" length="23" decimal="3" jt="92" >
+				<defo>getdate()</defo>
+			</column>
+			<index name="PK__returns__35C2347363D2B7F1" unique="PRIMARY_KEY" >
+				<column name="return_id" />
+			</index>
+			<fk name="FK__returns__order_i__403A8C7D" to_schema="OSC_MS.dbo" to_table="orders" >
+				<fk_column name="order_id" pk="order_id" />
+			</fk>
+			<fk name="FK__returns__product__412EB0B6" to_schema="OSC_MS.dbo" to_table="products" >
+				<fk_column name="product_id" pk="product_id" />
+			</fk>
+		</table>
+		<table name="roles" row_count="0" >
+			<column name="role_id" type="int" length="10" decimal="0" jt="4" mandatory="y" autoincrement="y" />
+			<column name="role_name" type="varchar" length="255" decimal="0" jt="12" />
+			<index name="PK__roles__760965CC223EECEA" unique="PRIMARY_KEY" >
+				<column name="role_id" />
+			</index>
+		</table>
+		<table name="shipments" row_count="0" >
+			<column name="shipment_id" type="int" length="10" decimal="0" jt="4" mandatory="y" autoincrement="y" />
+			<column name="order_id" type="int" length="10" decimal="0" jt="4" />
+			<column name="warehouse_id" type="int" length="10" decimal="0" jt="4" />
+			<column name="shipment_date" type="datetime" length="23" decimal="3" jt="92" >
+				<defo>getdate()</defo>
+			</column>
+			<index name="PK__shipment__41466E59D477AFF8" unique="PRIMARY_KEY" >
+				<column name="shipment_id" />
+			</index>
+			<fk name="FK__shipments__order__29221CFB" to_schema="OSC_MS.dbo" to_table="orders" >
+				<fk_column name="order_id" pk="order_id" />
+			</fk>
+			<fk name="FK__shipments__wareh__2A164134" to_schema="OSC_MS.dbo" to_table="warehouses" >
+				<fk_column name="warehouse_id" pk="warehouse_id" />
+			</fk>
+		</table>
+		<table name="supplier_products" row_count="0" >
+			<column name="supplier_product_id" type="int" length="10" decimal="0" jt="4" mandatory="y" autoincrement="y" />
+			<column name="supplier_id" type="int" length="10" decimal="0" jt="4" />
+			<column name="product_id" type="int" length="10" decimal="0" jt="4" />
+			<column name="price" type="decimal" length="10" decimal="2" jt="3" />
+			<column name="created_at" type="datetime" length="23" decimal="3" jt="92" >
+				<defo>getdate()</defo>
+			</column>
+			<index name="PK__supplier__CAA7D499FA1CB00C" unique="PRIMARY_KEY" >
+				<column name="supplier_product_id" />
+			</index>
+			<fk name="FK__supplier___produ__151B244E" to_schema="OSC_MS.dbo" to_table="products" >
+				<fk_column name="product_id" pk="product_id" />
+			</fk>
+			<fk name="FK__supplier___suppl__14270015" to_schema="OSC_MS.dbo" to_table="suppliers" >
+				<fk_column name="supplier_id" pk="supplier_id" />
+			</fk>
+		</table>
+		<table name="suppliers" row_count="0" >
+			<column name="supplier_id" type="int" length="10" decimal="0" jt="4" mandatory="y" autoincrement="y" />
+			<column name="supplier_name" type="varchar" length="255" decimal="0" jt="12" />
+			<column name="created_at" type="datetime" length="23" decimal="3" jt="92" >
+				<defo>getdate()</defo>
+			</column>
+			<index name="PK__supplier__6EE594E804936580" unique="PRIMARY_KEY" >
+				<column name="supplier_id" />
+			</index>
+		</table>
+		<table name="system_settings" row_count="0" >
+			<column name="setting_id" type="int" length="10" decimal="0" jt="4" mandatory="y" autoincrement="y" />
+			<column name="setting_key" type="varchar" length="255" decimal="0" jt="12" />
+			<column name="setting_value" type="varchar" length="255" decimal="0" jt="12" />
+			<column name="created_at" type="datetime" length="23" decimal="3" jt="92" >
+				<defo>getdate()</defo>
+			</column>
+			<index name="PK__system_s__256E1E322AC7F3E7" unique="PRIMARY_KEY" >
+				<column name="setting_id" />
+			</index>
+		</table>
+		<table name="tblreturns" row_count="0" >
+			<column name="return_id" type="int" length="10" decimal="0" jt="4" mandatory="y" autoincrement="y" />
+			<column name="order_id" type="int" length="10" decimal="0" jt="4" />
+			<column name="product_id" type="int" length="10" decimal="0" jt="4" />
+			<column name="return_reason" type="varchar" length="255" decimal="0" jt="12" />
+			<column name="return_date" type="datetime" length="23" decimal="3" jt="92" >
+				<defo>getdate()</defo>
+			</column>
+			<index name="PK__tblretur__35C23473184E26EC" unique="PRIMARY_KEY" >
+				<column name="return_id" />
+			</index>
+			<fk name="FK__tblreturn__order__5441852A" to_schema="OSC_MS.dbo" to_table="orders" >
+				<fk_column name="order_id" pk="order_id" />
+			</fk>
+			<fk name="FK__tblreturn__produ__5535A963" to_schema="OSC_MS.dbo" to_table="products" >
+				<fk_column name="product_id" pk="product_id" />
+			</fk>
+		</table>
+		<table name="top_selling_products" row_count="0" >
+			<column name="id" type="int" length="10" decimal="0" jt="4" mandatory="y" autoincrement="y" />
+			<column name="product_id" type="int" length="10" decimal="0" jt="4" />
+			<index name="PK__top_sell__3213E83F00B58562" unique="PRIMARY_KEY" >
+				<column name="id" />
+			</index>
+			<fk name="FK__top_selli__produ__17F790F9" to_schema="OSC_MS.dbo" to_table="products" >
+				<fk_column name="product_id" pk="product_id" />
+			</fk>
+		</table>
+		<table name="user_claims" row_count="0" >
+			<column name="user_claim_id" type="int" length="10" decimal="0" jt="4" mandatory="y" autoincrement="y" />
+			<column name="user_id" type="int" length="10" decimal="0" jt="4" />
+			<column name="claim_id" type="int" length="10" decimal="0" jt="4" />
+			<index name="PK__user_cla__E653EE7CBE785E41" unique="PRIMARY_KEY" >
+				<column name="user_claim_id" />
+			</index>
+			<fk name="FK__user_clai__claim__21B6055D" to_schema="OSC_MS.dbo" to_table="claims" >
+				<fk_column name="claim_id" pk="claim_id" />
+			</fk>
+			<fk name="FK__user_clai__user___20C1E124" to_schema="OSC_MS.dbo" to_table="users" >
+				<fk_column name="user_id" pk="user_id" />
+			</fk>
+		</table>
+		<table name="user_roles" row_count="0" >
+			<column name="user_role_id" type="int" length="10" decimal="0" jt="4" mandatory="y" autoincrement="y" />
+			<column name="user_id" type="int" length="10" decimal="0" jt="4" />
+			<column name="role_id" type="int" length="10" decimal="0" jt="4" />
+			<index name="PK__user_rol__B8D9ABA2EFD8427F" unique="PRIMARY_KEY" >
+				<column name="user_role_id" />
+			</index>
+			<fk name="FK__user_role__role___1BFD2C07" to_schema="OSC_MS.dbo" to_table="roles" >
+				<fk_column name="role_id" pk="role_id" />
+			</fk>
+			<fk name="FK__user_role__user___1B0907CE" to_schema="OSC_MS.dbo" to_table="users" >
+				<fk_column name="user_id" pk="user_id" />
+			</fk>
+		</table>
+		<table name="users" row_count="0" >
+			<column name="user_id" type="int" length="10" decimal="0" jt="4" mandatory="y" autoincrement="y" />
+			<column name="username" type="varchar" length="255" decimal="0" jt="12" />
+			<column name="password" type="varchar" length="255" decimal="0" jt="12" />
+			<column name="email" type="varchar" length="255" decimal="0" jt="12" />
+			<column name="created_at" type="datetime" length="23" decimal="3" jt="92" >
+				<defo>getdate()</defo>
+			</column>
+			<index name="PK__users__B9BE370F68885F89" unique="PRIMARY_KEY" >
+				<column name="user_id" />
+			</index>
+		</table>
+		<table name="warehouses" row_count="0" >
+			<column name="warehouse_id" type="int" length="10" decimal="0" jt="4" mandatory="y" autoincrement="y" />
+			<column name="warehouse_name" type="varchar" length="255" decimal="0" jt="12" />
+			<column name="created_at" type="datetime" length="23" decimal="3" jt="92" >
+				<defo>getdate()</defo>
+			</column>
+			<index name="PK__warehous__734FE6BF71A8501E" unique="PRIMARY_KEY" >
+				<column name="warehouse_id" />
+			</index>
+		</table>
+	</schema>
+	<connector name="SqlServer" database="SqlServer" driver_class="com.microsoft.sqlserver.jdbc.SQLServerDriver" driver_jar="mssql-jdbc-8.2.2.jre11.jar" driver_desc="Windows Authentication, Current User - Native Driver" host="localhost" port="1433" instance="OSC_MS" user="sa" passwd="c2ExMjM0NQ==" />
+	<layout name="Default Layout" id="Layout_db2" show_relation="columns" >
+		<entity schema="OSC_MS.dbo" name="cart_items" color="C7F4BE" x="1312" y="272" />
+		<entity schema="OSC_MS.dbo" name="categories" color="BED3F4" x="1024" y="352" />
+		<entity schema="OSC_MS.dbo" name="checkouts" color="D1BEF4" x="48" y="528" />
+		<entity schema="OSC_MS.dbo" name="claims" color="C7F4BE" x="1440" y="240" />
+		<entity schema="OSC_MS.dbo" name="coupon_usage" color="C7F4BE" x="1328" y="80" />
+		<entity schema="OSC_MS.dbo" name="coupons" color="C7F4BE" x="1488" y="80" />
+		<entity schema="OSC_MS.dbo" name="featured_products" color="BED3F4" x="880" y="368" />
+		<entity schema="OSC_MS.dbo" name="feedback_ratings" color="F4DDBE" x="1232" y="480" />
+		<entity schema="OSC_MS.dbo" name="feedbacks" color="F4DDBE" x="1440" y="480" />
+		<entity schema="OSC_MS.dbo" name="image_uploads" color="BED3F4" x="720" y="368" />
+		<entity schema="OSC_MS.dbo" name="inventory" color="BEBEF4" x="304" y="128" />
+		<entity schema="OSC_MS.dbo" name="order_items" color="BEBEF4" x="256" y="304" />
+		<entity schema="OSC_MS.dbo" name="orders" color="BEBEF4" x="176" y="112" />
+		<entity schema="OSC_MS.dbo" name="payment_methods" color="D1BEF4" x="224" y="528" />
+		<entity schema="OSC_MS.dbo" name="payments" color="D1BEF4" x="320" y="608" />
+		<entity schema="OSC_MS.dbo" name="products" color="BED3F4" x="848" y="96" />
+		<entity schema="OSC_MS.dbo" name="purchase_order_items" color="BED3F4" x="608" y="544" />
+		<entity schema="OSC_MS.dbo" name="purchase_orders" color="BED3F4" x="800" y="544" />
+		<entity schema="OSC_MS.dbo" name="replacements" color="BEBEF4" x="48" y="288" />
+		<entity schema="OSC_MS.dbo" name="returns" color="BEBEF4" x="48" y="144" />
+		<entity schema="OSC_MS.dbo" name="roles" color="C7F4BE" x="1184" y="352" />
+		<entity schema="OSC_MS.dbo" name="shipments" color="BEBEF4" x="400" y="352" />
+		<entity schema="OSC_MS.dbo" name="supplier_products" color="BED3F4" x="960" y="528" />
+		<entity schema="OSC_MS.dbo" name="suppliers" color="BED3F4" x="800" y="656" />
+		<entity schema="OSC_MS.dbo" name="system_settings" color="3986C1" x="1232" y="656" />
+		<entity schema="OSC_MS.dbo" name="tblreturns" color="BED3F4" x="1024" y="96" />
+		<entity schema="OSC_MS.dbo" name="top_selling_products" color="BED3F4" x="688" y="192" />
+		<entity schema="OSC_MS.dbo" name="user_claims" color="C7F4BE" x="1440" y="320" />
+		<entity schema="OSC_MS.dbo" name="user_roles" color="C7F4BE" x="1184" y="224" />
+		<entity schema="OSC_MS.dbo" name="users" color="C7F4BE" x="1200" y="80" />
+		<entity schema="OSC_MS.dbo" name="warehouses" color="BEBEF4" x="464" y="128" />
+		<group name="feedback_ratings" color="F7F2EC" >
+			<entity schema="OSC_MS.dbo" name="feedback_ratings" />
+			<entity schema="OSC_MS.dbo" name="feedbacks" />
+		</group>
+		<group name="checkouts" color="F0ECF7" >
+			<entity schema="OSC_MS.dbo" name="checkouts" />
+			<entity schema="OSC_MS.dbo" name="payment_methods" />
+			<entity schema="OSC_MS.dbo" name="payments" />
+		</group>
+		<group name="purchase_order_items" color="ECF0F7" >
+			<entity schema="OSC_MS.dbo" name="purchase_order_items" />
+			<entity schema="OSC_MS.dbo" name="purchase_orders" />
+			<entity schema="OSC_MS.dbo" name="supplier_products" />
+			<entity schema="OSC_MS.dbo" name="suppliers" />
+		</group>
+		<group name="products" color="ECF0F7" >
+			<entity schema="OSC_MS.dbo" name="products" />
+			<entity schema="OSC_MS.dbo" name="tblreturns" />
+			<entity schema="OSC_MS.dbo" name="categories" />
+			<entity schema="OSC_MS.dbo" name="featured_products" />
+			<entity schema="OSC_MS.dbo" name="image_uploads" />
+			<entity schema="OSC_MS.dbo" name="top_selling_products" />
+		</group>
+		<group name="users" color="EEF7EC" >
+			<entity schema="OSC_MS.dbo" name="users" />
+			<entity schema="OSC_MS.dbo" name="coupon_usage" />
+			<entity schema="OSC_MS.dbo" name="user_claims" />
+			<entity schema="OSC_MS.dbo" name="cart_items" />
+			<entity schema="OSC_MS.dbo" name="user_roles" />
+			<entity schema="OSC_MS.dbo" name="claims" />
+			<entity schema="OSC_MS.dbo" name="roles" />
+			<entity schema="OSC_MS.dbo" name="coupons" />
+		</group>
+		<group name="orders" color="ECECF7" >
+			<entity schema="OSC_MS.dbo" name="orders" />
+			<entity schema="OSC_MS.dbo" name="inventory" />
+			<entity schema="OSC_MS.dbo" name="warehouses" />
+			<entity schema="OSC_MS.dbo" name="shipments" />
+			<entity schema="OSC_MS.dbo" name="order_items" />
+			<entity schema="OSC_MS.dbo" name="replacements" />
+			<entity schema="OSC_MS.dbo" name="returns" />
+		</group>
+	</layout>
+	<layout name="Sample Layout with Tools" id="Layout_a70" show_column_type="y" show_relation="columns" >
+		<entity schema="OSC_MS.dbo" name="cart_items" color="C7F4BE" x="2304" y="816" />
+		<entity schema="OSC_MS.dbo" name="categories" color="BED3F4" x="1728" y="864" />
+		<entity schema="OSC_MS.dbo" name="checkouts" color="D1BEF4" x="48" y="1136" />
+		<entity schema="OSC_MS.dbo" name="claims" color="C7F4BE" x="2784" y="816" />
+		<entity schema="OSC_MS.dbo" name="coupon_usage" color="C7F4BE" x="2560" y="592" />
+		<entity schema="OSC_MS.dbo" name="coupons" color="C7F4BE" x="2800" y="592" />
+		<entity schema="OSC_MS.dbo" name="featured_products" color="BED3F4" x="1456" y="864" />
+		<entity schema="OSC_MS.dbo" name="feedback_ratings" color="F4DDBE" x="3104" y="592" />
+		<entity schema="OSC_MS.dbo" name="feedbacks" color="F4DDBE" x="3344" y="592" />
+		<entity schema="OSC_MS.dbo" name="image_uploads" color="BED3F4" x="1200" y="864" />
+		<entity schema="OSC_MS.dbo" name="inventory" color="BEBEF4" x="624" y="592" />
+		<entity schema="OSC_MS.dbo" name="order_items" color="BEBEF4" x="368" y="848" />
+		<entity schema="OSC_MS.dbo" name="orders" color="BEBEF4" x="368" y="592" />
+		<entity schema="OSC_MS.dbo" name="payment_methods" color="D1BEF4" x="336" y="1136" />
+		<entity schema="OSC_MS.dbo" name="payments" color="D1BEF4" x="672" y="1136" />
+		<entity schema="OSC_MS.dbo" name="products" color="BED3F4" x="1456" y="592" />
+		<entity schema="OSC_MS.dbo" name="purchase_order_items" color="BED3F4" x="336" y="80" />
+		<entity schema="OSC_MS.dbo" name="purchase_orders" color="BED3F4" x="624" y="80" />
+		<entity schema="OSC_MS.dbo" name="replacements" color="BEBEF4" x="48" y="848" />
+		<entity schema="OSC_MS.dbo" name="returns" color="BEBEF4" x="80" y="624" />
+		<entity schema="OSC_MS.dbo" name="roles" color="C7F4BE" x="2048" y="1008" />
+		<entity schema="OSC_MS.dbo" name="shipments" color="BEBEF4" x="624" y="848" />
+		<entity schema="OSC_MS.dbo" name="supplier_products" color="BED3F4" x="624" y="320" />
+		<entity schema="OSC_MS.dbo" name="suppliers" color="BED3F4" x="880" y="320" />
+		<entity schema="OSC_MS.dbo" name="system_settings" color="3986C1" x="3104" y="976" />
+		<entity schema="OSC_MS.dbo" name="tblreturns" color="BED3F4" x="1728" y="592" />
+		<entity schema="OSC_MS.dbo" name="top_selling_products" color="BED3F4" x="1232" y="688" />
+		<entity schema="OSC_MS.dbo" name="user_claims" color="C7F4BE" x="2560" y="816" />
+		<entity schema="OSC_MS.dbo" name="user_roles" color="C7F4BE" x="2080" y="816" />
+		<entity schema="OSC_MS.dbo" name="users" color="C7F4BE" x="2304" y="592" />
+		<entity schema="OSC_MS.dbo" name="warehouses" color="BEBEF4" x="864" y="592" />
+		<callout x="1456" y="480" pointer="Round" >
+			<comment><![CDATA[This is a sample layout with tools. 
+For better understanding the schema create multiple layouts with same or different tables. 
+Double-click on any table, column or foreign key to edit.]]></comment>
+		</callout>
+		<group name="feedback_ratings" color="F7F2EC" >
+			<entity schema="OSC_MS.dbo" name="feedback_ratings" />
+			<entity schema="OSC_MS.dbo" name="feedbacks" />
+		</group>
+		<group name="checkouts" color="F0ECF7" >
+			<entity schema="OSC_MS.dbo" name="checkouts" />
+			<entity schema="OSC_MS.dbo" name="payment_methods" />
+			<entity schema="OSC_MS.dbo" name="payments" />
+		</group>
+		<group name="purchase_order_items" color="ECF0F7" >
+			<entity schema="OSC_MS.dbo" name="purchase_order_items" />
+			<entity schema="OSC_MS.dbo" name="purchase_orders" />
+			<entity schema="OSC_MS.dbo" name="supplier_products" />
+			<entity schema="OSC_MS.dbo" name="suppliers" />
+		</group>
+		<group name="products" color="ECF0F7" >
+			<entity schema="OSC_MS.dbo" name="products" />
+			<entity schema="OSC_MS.dbo" name="tblreturns" />
+			<entity schema="OSC_MS.dbo" name="categories" />
+			<entity schema="OSC_MS.dbo" name="featured_products" />
+			<entity schema="OSC_MS.dbo" name="image_uploads" />
+			<entity schema="OSC_MS.dbo" name="top_selling_products" />
+		</group>
+		<group name="users" color="EEF7EC" >
+			<entity schema="OSC_MS.dbo" name="users" />
+			<entity schema="OSC_MS.dbo" name="coupon_usage" />
+			<entity schema="OSC_MS.dbo" name="user_claims" />
+			<entity schema="OSC_MS.dbo" name="cart_items" />
+			<entity schema="OSC_MS.dbo" name="user_roles" />
+			<entity schema="OSC_MS.dbo" name="claims" />
+			<entity schema="OSC_MS.dbo" name="roles" />
+			<entity schema="OSC_MS.dbo" name="coupons" />
+		</group>
+		<group name="orders" color="ECECF7" >
+			<entity schema="OSC_MS.dbo" name="orders" />
+			<entity schema="OSC_MS.dbo" name="inventory" />
+			<entity schema="OSC_MS.dbo" name="warehouses" />
+			<entity schema="OSC_MS.dbo" name="shipments" />
+			<entity schema="OSC_MS.dbo" name="order_items" />
+			<entity schema="OSC_MS.dbo" name="replacements" />
+			<entity schema="OSC_MS.dbo" name="returns" />
+		</group>
+		<script name="Sample SQL Editor" id="Editor_24f8" language="SQL" >
+			<string><![CDATA[SELECT product_id, category_id, product_code, product_number, price, description, image_url, created_at
+FROM
+	dbo.products s;]]></string>
+		</script>
+		<browser id="Browse_16a6" name="Sample Relational Data Browse" confirm_updates="y" >
+			<browse_table schema="OSC_MS.dbo" entity="products" x="20" y="20" width="400" height="300" >
+				<browse_table schema="OSC_MS.dbo" entity="cart_items" fk="FK__cart_item__produ__267ABA7A" x="440" y="20" width="500" height="350" >
+					<browse_table schema="OSC_MS.dbo" entity="users" fk="FK__cart_item__user___25869641" x="960" y="20" width="500" height="350" record_view="y" />
+				</browse_table>
+			</browse_table>
+		</browser>
+		<query id="Query_1db9" name="Sample Query Builder" >
+			<query_table schema="OSC_MS.dbo" name="products" alias="p" x="48" y="48" >
+				<column name="product_id" />
+				<column name="category_id" />
+				<column name="product_code" />
+				<column name="product_number" />
+				<column name="price" />
+				<column name="description" />
+				<column name="image_url" />
+				<column name="created_at" />
+				<query_table schema="OSC_MS.dbo" name="cart_items" alias="ci" x="240" y="48" fk="FK__cart_item__produ__267ABA7A" type="Inner Join" >
+					<column name="cart_item_id" />
+					<column name="user_id" />
+					<column name="product_id" />
+					<column name="quantity" />
+					<column name="created_at" />
+					<query_table schema="OSC_MS.dbo" name="users" alias="u" x="432" y="48" fk="FK__cart_item__user___25869641" type="Inner Join" >
+						<column name="user_id" />
+						<column name="username" />
+						<column name="password" />
+						<column name="email" />
+						<column name="created_at" />
+					</query_table>
+				</query_table>
+			</query_table>
+		</query>
+	</layout>
+</project>
