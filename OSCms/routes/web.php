@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\FrontController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,6 +15,18 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
+
+//_____________ frontend __________________
+#region frontent Route
+Route::get('/',[FrontController::class, "Index"]);
+#endregion
+
+//_____________ backend __________________
+#region backend Route
+Route::get('/dasbhoard/Index',[DashboardController::class, "Index"]);
+
+#endregion
+
